@@ -1,0 +1,62 @@
+The program was built to provide an edited audio output out of an existing input.
+Externally, the audio was saved in a wav file and internally represented as a
+tuple with two members - (sample_rate, audio_data) such that audio data is
+a list conatining notes - each note composed of a list with two channels.
+
+INPUT VALIDATION
+-------------------------
+The entire handling of input validation is encapsulated in a single function,
+which we used instead of the regular input function, that can (provided
+the purpose of the input) return a valid input for each separate function.
+
+user_input(msg, purpose, menu_length=0) handles all input validation.
+
+MAIN BUILD
+--------------------------
+the program has two nested menus - the main menu and manipulation menu.
+The main menu contains the option to navigate to the manipulation menu,
+the option to compose a wav file out of formatted instructions,
+and the option to quit the program saving the changes to a wav file.
+
+main_menu() handles the main menu.
+
+manipulation(internal_data=None) handles the manipulation menu.
+if the optional parameter is defaulted, the program asks for a file to read.
+otherwise it will use the data provided.
+
+save_audio(audio) will save an internal audio structure as a wav file.
+
+Sound (Class) - we used this class to neatly store constants we used throughout
+the program in order to increase code readability and modularity.
+
+COMPOSITION
+----------------------------
+
+composition() will handle the inner logic and data flow of composition.
+(handling input, converting instructions to audio, and submitting for
+manipulation)
+
+compose_melody(raw_instructions) is a technical function - designated to
+accept instructions and convert them into a valid audio data structure.
+
+frequency(note) is a helper function, called from compose_melody
+to determine the frequency of a note given in str format.
+
+MANIPULATION
+-----------------------------
+
+change_volume(audio, multiplier)
+This function can dynamically increase or decrease the volume of the audio.
+To meet constant requirements, we use the class "sound" explained before.
+
+speed_change(audio, specifier)
+This function can either double or halve the speed of the audio.
+The specifier provided (from sound class) determines either to double
+or halve the speed.
+
+reverse_audio(audio)
+this function can reverse the order of notes the audio.
+
+low_pass_filter(audio)
+This function will return a "dimmed" version of the original audio,
+using the first and last notes as reference.
